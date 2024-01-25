@@ -5,6 +5,7 @@
     --pure:#FFFFFF;
     --ternary:#898989;
     --light:#F2F2F2; 
+    --secondary:#070606;
 }
 * {
     margin: 0;
@@ -72,4 +73,116 @@ header nav .branding{
 .hero .right p{
     line-height: 1.9;
     margin-bottom: 2rem;
+}
+
+section{
+    padding: 6rem 0;
+}
+section.about .about-me-img{
+    height: 450px;
+}
+section.about h1{
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+section.about h1 span{
+    color: var(--primary);
+}
+section.about h3{
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+section.about p{
+    font-family: 'Lato', sans-serif;
+    line-height: 1.8;
+    color: var(--ternary);
+    margin-bottom: 2rem;
+}
+section.about.social{
+    display: flex;
+}
+section.about .social a{
+    display: flex;
+    background: var(--dark);
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 0.6rem;
+    transition: all .3sec;
+
+}
+section.about .social a:hover{
+    background-color: var(--primary);
+}
+section.about .social a img{
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem;;
+}
+.section-heading{
+    color: var(--secondary);
+    text-align: center;
+    margin-bottom: 1rem;
+    line-height: 0.5;
+}
+.section-heading{
+    color: var(--secondary);
+    text-align: center;
+    margin-bottom: 1rem;
+    line-height: 0.5;
+}
+.section-heading span {
+    color: var(--primary);
+}
+.section-heading + p{
+    color: var(--ternary);
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    margin-bottom: 9rem;
+
+}
+section.services {
+    background-color: var(--light);
+}
+section.services .card-wrapper{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-column-gap: 2rem;
+    grid-row-gap: 6rem;
+}
+section.services .card-wrapper .card{
+    background-color: var(--pure);
+    padding: 3rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    transition: all .3s ease;
+    position: relative;
+    padding-top: 5rem;
+}
+section.services .card-wrapper .card h2{
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+section.services .card-wrapper .card p{
+    font-family: 'Lato', sans-serif;
+    color: var(--ternary);
+    line-height: 1.6;
+}
+section.services .card img{
+    position: absolute;
+    top: -3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+section.services .card-wrapper .card:hover{
+    background-color: var(--dark);
+}
+section.services .card-wrapper .card:hover h2,section.services .card-wrapper .card:hover p{
+    color: var(--pure);
 }
