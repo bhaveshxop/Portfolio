@@ -203,3 +203,47 @@ section.freelancer p{
     line-height: 1.8;
     margin-bottom: 2rem;
 }
+section.review .slider .slide img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 2rem;
+}
+section.review .slider .slide{
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 10rem;
+}
+section.review .slider .slide pP{
+    font-family: 'Lato', sans-serif;
+    color: var(--ternary);
+    margin-bottom: 1rem;
+}
+section.review .slider .slide span{
+    font-size: 0.8rem;
+}
+
+section.review .slider-dots .dots{
+    list-style-type: none;
+    display: flex!important;
+    justify-content: center;
+    margin-top: 2rem;
+}
+section.review .slider-dots button{
+    font-size: 0;
+    width: 10px;
+    height: 7px;
+    margin-right: 0.3rem;
+    border: none;
+    outline: none;
+    background-color: var(--ternary);
+    border-radius: 50px;
+    cursor: pointer;
+}
+section.review .dots li.slick-active button{
+    background-color: var(--primary);
+    width: 20px;
+}
