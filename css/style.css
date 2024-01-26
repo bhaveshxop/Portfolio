@@ -212,7 +212,7 @@ section.services .card-wrapper .card:hover h2,section.services .card-wrapper .ca
 }
 
 section.freelancer{
-    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(../images/camera.png); ;
+    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(.../images/camera.png); ;
     color: var(--pure);
     text-align: center;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 67% 80%,0 100%);
