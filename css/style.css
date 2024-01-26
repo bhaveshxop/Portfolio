@@ -28,6 +28,28 @@ header{
     padding: 0 15px;
     margin: 0 auto;
 }
+@media (max-width : 576px){
+    .container{
+        max-width: 540px;
+    }
+}
+
+@media (max-width : 768px){
+    .container{
+        max-width: 720px;
+    }
+}
+
+@media (max-width : 992px){
+    .container{
+        max-width: 960px;
+    }
+}
+@media (max-width : 1200px){
+    .container{
+        max-width: 1152px;
+    }
+}
 
 header nav .left a{
     color: var(--pure);
@@ -431,4 +453,170 @@ footer .footer-socials a{
 }
 footer .copyright{
     color: var(--ternary);
+}
+
+te-main-wrapper{
+    position: relative;
+}
+.hamberger{
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    display: none;
+    z-index: 11;
+    background: none;
+    outline: none;  
+    border: none;
+    cursor: pointer;
+}
+.hamberger img{
+    width: 30px;
+}
+
+.mobile-nav{
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    padding-top: 5rem;
+    background-color: var(--light);
+    transform: translatex(-100%);
+    transition: all .3s ease-out; 
+}
+.open{
+    transform: translatex(0%);
+}
+.mobile-nav ul{
+    list-style-type: none;
+}
+.mobile-nav ul li a{
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 2rem;
+}
+.times{
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+}
+.times img{
+    width: 30px;
+}
+
+@media (max-width : 1024px){
+    header #main-nav{
+        display: none;
+    }
+    .hamberger{
+        display: block;
+    }
+    .hero .left img{
+        width: 260px;
+    }
+    .hero .right h1{
+        font-size: 3rem;
+    }
+    .hero{
+        padding-top: 10rem;
+    }
+    header{
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 27% 89%,0 100%);
+    }
+    
+    section.about .about-me-img{
+        height: 360px;
+    }
+    section.services .card-wrapper{
+        grid-template-columns: repeat(2,1fr);
+    }
+    section.work .card-wrapper{
+        grid-template-columns: repeat(2,1fr);
+    }
+    section.blog .card-wrapper{
+        grid-template-columns: repeat(1,1fr);
+        margin: 2rem;
+        margin-top: 4rem;
+    }
+    section.blog {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 67% 96%,0 100%);
+    }       
+}
+
+@media(max-width:576px){
+    .hero {
+        flex-direction: column;
+    }
+    header{
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 69% 95%,0 100%);
+    }
+    .hero .right{
+        position: absolute;
+        top: 260px;
+        padding: 0 1rem;
+        background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.9));
+    }
+    .hero .left{
+        margin-top: -5rem;
+        margin-right: -9rem;
+        padding-bottom: 3rem;
+    }
+    .about-inner-wrap{
+        flex-direction: column;
+    }
+    .about .right{
+        margin-top: 5rem;
+        text-align: center;
+        padding: 0 0.5rem;
+    }
+    .about .right .social{
+        margin-top: 2rem;
+        justify-content: center;
+    }
+    section{
+        padding: 3rem 0;
+    }
+    section.services .card-wrapper{
+        margin-top: 6rem;
+        grid-template-columns: repeat(1,1fr);
+    }
+    section.services .card-wrapper .card{
+        margin: 1rem;
+    }
+    section.freelancer{
+        line-height: 1.4;
+        padding-bottom: 8rem;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 66% 93%,0 100%);
+    }
+    section.freelancer p{
+        padding: 2rem;
+    }
+    section.review .slider .slide{
+        padding: 0;
+    }
+    .section-heading + p {
+        margin-bottom: 3rem;
+    }
+    section.work .card-wrapper{
+        grid-template-columns: repeat(1,1fr);
+    }
+    section.work .card-wrapper .card{
+        margin: 1rem;
+    }
+    section.blog{
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 65% 97%,0 100%);
+    }
+    section.contact .card-wrapper{
+        grid-template-columns: repeat(1,1fr);
+    }
+    section.contact .input-wrap{
+        grid-template-columns: repeat(1,1fr);
+    }
+     
 }
