@@ -1,45 +1,16 @@
-.flex{
-    display : flex;
-}
-.items-center{
-    align-items : center;
-}
-.justify-between{
-    justify-content : space-between;
-}
-.btn{
-    padding : 0.8rem 3rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border: 2px solid transparent;
-    outline: none;
-    cursor: pointer;
+/* ─────────────────────────────────────────────
+   utilities.css — minimal helpers
+   (the heavy lifting lives in style.css)
+   ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
 
-}
-.btn-primary{
-    background-color: var(--primary);
-    transition: all .3s ease;
-    text-transform: uppercase;
-}
-
-.btn-primary:hover{
-    background-color: transparent;
-    border: 2px solid var(--primary);
-    color: var(--primary);
-}
-.btn-secondary{
-    background: transparent;
-    color: var(--primary);
-    border-color: var(--primary) ;
- 
-}
-.btn-secondary:hover{
-    background-color: var(--primary);
-    color: var(--secondary);
-}
-.flex-1{
-    flex: 1;
-}
-.justify-center{
-    justify-content: center;
-}
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.flex-1 { flex: 1; }
+.hidden { display: none !important; }
