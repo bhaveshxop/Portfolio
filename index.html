@@ -1,312 +1,591 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <link rel="stylesheet" href="css/style.css">
-    <title>Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="BHAVESH.EXE — A 3D arcade-themed portfolio of full-stack developer Bhavesh Patil. Press start to enter the dev arcade." />
+    <meta name="theme-color" content="#0a0014" />
+    <title>BHAVESH.EXE — Dev Arcade</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2305000d'/%3E%3Crect x='6' y='6' width='20' height='20' fill='none' stroke='%2300ffd0' stroke-width='2'/%3E%3Crect x='10' y='10' width='4' height='4' fill='%23ff2bd6'/%3E%3Crect x='18' y='10' width='4' height='4' fill='%23ff2bd6'/%3E%3Crect x='10' y='18' width='12' height='2' fill='%2300ffd0'/%3E%3C/svg%3E" />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&family=VT323&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/utilities.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+    </script>
 </head>
-<body>
-  <div class="site-main-wrapper">
-    <header >
-        <button class="hamberger">
-            <img src="./images/hamberger.svg" alt="">
-        </button>
-        <div class="mobile-nav">
-            <button class="times"><img src="./images/times.svg" alt=""></button>
+<body class="booting">
+
+    <!-- ─────────────────────────────  BOOT / TITLE SCREEN  ───────────────────────────── -->
+    <div id="boot-screen" class="boot-screen">
+        <div class="boot-inner">
+            <pre class="boot-logo">
+ ██████╗ ██╗  ██╗ █████╗ ██╗   ██╗███████╗███████╗██╗  ██╗   ███████╗██╗  ██╗███████╗
+ ██╔══██╗██║  ██║██╔══██╗██║   ██║██╔════╝██╔════╝██║  ██║   ██╔════╝╚██╗██╔╝██╔════╝
+ ██████╔╝███████║███████║██║   ██║█████╗  ███████╗███████║   █████╗   ╚███╔╝ █████╗  
+ ██╔══██╗██╔══██║██╔══██║╚██╗ ██╔╝██╔══╝  ╚════██║██╔══██║   ██╔══╝   ██╔██╗ ██╔══╝  
+ ██████╔╝██║  ██║██║  ██║ ╚████╔╝ ███████╗███████║██║  ██║██╗███████╗██╔╝ ██╗███████╗
+ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝
+            </pre>
+            <div class="boot-log" id="boot-log">
+                <p>&gt; BIOS v3.14 — initializing kernel...</p>
+                <p>&gt; mounting /dev/portfolio ...... [<span class="ok">OK</span>]</p>
+                <p>&gt; loading skill_modules.bin ...... [<span class="ok">OK</span>]</p>
+                <p>&gt; starting webgl renderer ...... [<span class="ok">OK</span>]</p>
+                <p>&gt; calibrating particle systems ...... [<span class="ok">OK</span>]</p>
+                <p>&gt; charging plasma cannons ...... [<span class="ok">OK</span>]</p>
+                <p>&gt; <span class="blink">READY</span></p>
+            </div>
+            <div class="boot-progress">
+                <div class="boot-progress-bar"><span></span></div>
+                <div class="boot-progress-text" id="boot-progress-text">LOADING 0%</div>
+            </div>
+            <button id="start-btn" class="start-btn" disabled>
+                <span class="start-btn-inner">▶ PRESS START</span>
+            </button>
+            <div class="boot-footer">
+                <span>©2026 BHAVESH-CORP / ALL RIGHTS RESERVED</span>
+                <span class="blink">INSERT COIN ●●●</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─────────────────────────────  3D BACKGROUND  ───────────────────────────── -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- ─────────────────────────────  CRT / SCANLINE OVERLAY  ───────────────────────────── -->
+    <div class="crt-overlay" aria-hidden="true">
+        <div class="scanlines"></div>
+        <div class="vignette"></div>
+        <div class="rgb-split"></div>
+    </div>
+
+    <!-- ─────────────────────────────  CUSTOM CROSSHAIR CURSOR  ───────────────────────────── -->
+    <div id="crosshair" aria-hidden="true">
+        <span class="ch-top"></span>
+        <span class="ch-right"></span>
+        <span class="ch-bottom"></span>
+        <span class="ch-left"></span>
+        <span class="ch-dot"></span>
+    </div>
+
+    <!-- ─────────────────────────────  TOP HUD  ───────────────────────────── -->
+    <header class="hud-top" id="hud-top">
+        <div class="hud-player">
+            <div class="hud-avatar">
+                <img src="./images/bhavesh.jpg" alt="player avatar" />
+                <div class="hud-avatar-frame"></div>
+            </div>
+            <div class="hud-player-info">
+                <div class="player-name">BHAVESH<span class="cursor-blink">_</span></div>
+                <div class="player-class">CLASS: <span>FULL_STACK_DEV</span></div>
+            </div>
+        </div>
+
+        <div class="hud-bars">
+            <div class="bar-row"><span class="bar-label">HP</span><div class="bar"><div class="bar-fill hp" style="--w:100%"></div></div><span class="bar-val">100/100</span></div>
+            <div class="bar-row"><span class="bar-label">MP</span><div class="bar"><div class="bar-fill mp" style="--w:88%"></div></div><span class="bar-val">88/100</span></div>
+            <div class="bar-row"><span class="bar-label">XP</span><div class="bar"><div class="bar-fill xp" id="xp-fill" style="--w:64%"></div></div><span class="bar-val" id="xp-text">LV 24</span></div>
+        </div>
+
+        <div class="hud-controls">
+            <button class="hud-btn" id="sound-btn" title="Toggle sound"><span>♪</span></button>
+            <button class="hud-btn" id="game-btn" title="Mini-game"><span>★</span></button>
+            <button class="hud-btn" id="menu-btn" title="Pause menu"><span>≡</span></button>
+        </div>
+    </header>
+
+    <!-- ─────────────────────────────  LEVEL SELECT / SIDE NAV  ───────────────────────────── -->
+    <nav class="level-select" id="level-select" aria-label="Level select">
+        <div class="ls-title">LEVEL_SELECT</div>
+        <ul>
+            <li><a href="#world-0" data-level="0"><span class="ls-num">00</span><span class="ls-name">TITLE</span></a></li>
+            <li><a href="#world-1" data-level="1"><span class="ls-num">01</span><span class="ls-name">PROFILE</span></a></li>
+            <li><a href="#world-2" data-level="2"><span class="ls-num">02</span><span class="ls-name">SKILLS</span></a></li>
+            <li><a href="#world-3" data-level="3"><span class="ls-num">03</span><span class="ls-name">QUESTS</span></a></li>
+            <li><a href="#world-4" data-level="4"><span class="ls-num">04</span><span class="ls-name">TESTIMONIALS</span></a></li>
+            <li><a href="#world-5" data-level="5"><span class="ls-num">05</span><span class="ls-name">LORE</span></a></li>
+            <li><a href="#world-6" data-level="6"><span class="ls-num">06</span><span class="ls-name">CONTACT</span></a></li>
+        </ul>
+        <div class="ls-footer">
+            <span class="blink">●</span> ONLINE
+        </div>
+    </nav>
+
+    <!-- ─────────────────────────────  MAIN GAME WORLD  ───────────────────────────── -->
+    <main id="game-world">
+
+        <!-- WORLD 0 - TITLE SCREEN -->
+        <section id="world-0" class="world world-titlescreen">
+            <div class="world-inner">
+                <div class="title-tag">NOW PLAYING</div>
+                <h1 class="hero-title glitch" data-text="BHAVESH.EXE">BHAVESH.EXE</h1>
+                <h2 class="hero-sub">&lt; A WEB DEVELOPER'S ADVENTURE &gt;</h2>
+                <p class="hero-desc">
+                    Welcome, player. You've just entered the digital arcade of
+                    <b>Bhavesh Patil</b> — a full-stack web developer crafting
+                    interactive experiences with <span class="hl">code</span>,
+                    <span class="hl">creativity</span>, and a little bit of
+                    <span class="hl">chaos</span>. Use the level select on your
+                    left to explore worlds — or just <kbd>SCROLL</kbd> to keep
+                    playing.
+                </p>
+                <div class="hero-actions">
+                    <a href="#world-1" class="game-btn primary"><span>START QUEST ▸</span></a>
+                    <a href="#world-6" class="game-btn ghost"><span>CONTACT ✉</span></a>
+                </div>
+
+                <div class="hero-tickers">
+                    <div class="ticker"><span>● NEW HIGH SCORE ● BHAVESH 9999999 ● PRESS ANY KEY ● </span><span>● NEW HIGH SCORE ● BHAVESH 9999999 ● PRESS ANY KEY ● </span></div>
+                </div>
+
+                <div class="key-hints">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> SCROLL</span>
+                    <span><kbd>1</kbd>-<kbd>6</kbd> WARP</span>
+                    <span><kbd>M</kbd> MUTE</span>
+                    <span><kbd>G</kbd> MINI-GAME</span>
+                    <span class="hidden-hint">↑↑↓↓←→←→BA ???</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORLD 1 - PROFILE (ABOUT) -->
+        <section id="world-1" class="world world-profile">
+            <div class="world-header">
+                <span class="world-tag">// WORLD 01</span>
+                <h2 class="world-title">PLAYER<span> PROFILE</span></h2>
+                <div class="world-divider"><span></span><span></span><span></span></div>
+            </div>
+
+            <div class="profile-grid">
+                <div class="profile-card">
+                    <div class="profile-card-frame"></div>
+                    <div class="profile-avatar">
+                        <img src="./images/man-2.png" alt="Bhavesh Patil" />
+                        <div class="profile-scan"></div>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="ps-row"><span>NAME</span><b>BHAVESH PATIL</b></div>
+                        <div class="ps-row"><span>RACE</span><b>HUMAN+++</b></div>
+                        <div class="ps-row"><span>CLASS</span><b>WEB DEVELOPER</b></div>
+                        <div class="ps-row"><span>HOMEWORLD</span><b>PUNE, INDIA</b></div>
+                        <div class="ps-row"><span>STATUS</span><b class="status-on">ONLINE</b></div>
+                        <div class="ps-row"><span>QUESTS</span><b>42 / ∞</b></div>
+                    </div>
+                </div>
+
+                <div class="profile-bio">
+                    <h3 class="typed" data-typed="&gt; CAT ./bhavesh/README.md">&gt; CAT ./bhavesh/README.md</h3>
+                    <p>
+                        Hi, I'm <b>Bhavesh</b> — a full-stack web developer who
+                        believes the browser is the greatest game engine ever
+                        built. I craft pixel-perfect interfaces, smooth APIs,
+                        and the occasional 3D playground (like the one you're
+                        in right now).
+                    </p>
+                    <p>
+                        I'm a long-time student of the web — JavaScript, React,
+                        Node.js, Python, three.js, and the dark arts of CSS.
+                        When I'm not shipping code, I'm probably losing to a
+                        boss in some game and calling it "research."
+                    </p>
+
+                    <div class="attribute-grid">
+                        <div class="attr"><span>STR</span><b>78</b><div class="attr-bar" style="--w:78%"></div></div>
+                        <div class="attr"><span>DEX</span><b>91</b><div class="attr-bar" style="--w:91%"></div></div>
+                        <div class="attr"><span>INT</span><b>96</b><div class="attr-bar" style="--w:96%"></div></div>
+                        <div class="attr"><span>CHA</span><b>72</b><div class="attr-bar" style="--w:72%"></div></div>
+                        <div class="attr"><span>LUK</span><b>88</b><div class="attr-bar" style="--w:88%"></div></div>
+                        <div class="attr"><span>CRT</span><b>99</b><div class="attr-bar" style="--w:99%"></div></div>
+                    </div>
+
+                    <div class="profile-actions">
+                        <a href="#" class="game-btn primary"><span>↓ DOWNLOAD CV</span></a>
+                        <a href="#world-3" class="game-btn ghost"><span>SEE QUESTS ▸</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORLD 2 - SKILLS -->
+        <section id="world-2" class="world world-skills">
+            <div class="world-header">
+                <span class="world-tag">// WORLD 02</span>
+                <h2 class="world-title">SKILL<span> TREE</span></h2>
+                <div class="world-divider"><span></span><span></span><span></span></div>
+                <p class="world-sub">Inventory unlocked. Hover any skill to inspect.</p>
+            </div>
+
+            <div class="skills-layout">
+                <!-- 3D rotating skill cube canvas -->
+                <div class="skill-cube-wrap">
+                    <canvas id="skill-cube-canvas"></canvas>
+                    <div class="skill-cube-caption">[ DRAG TO ROTATE ]</div>
+                </div>
+
+                <div class="skills-grid">
+                    <div class="skill-card" data-lvl="MAX" style="--c:#00ffd0">
+                        <div class="sc-icon">&lt;/&gt;</div>
+                        <h3>FRONTEND</h3>
+                        <p>HTML5, CSS3, JS, React, Vue, Tailwind, GSAP, Three.js</p>
+                        <div class="sc-lvl">LV. <b>99</b></div>
+                        <div class="sc-bar"><div style="--w:99%"></div></div>
+                    </div>
+                    <div class="skill-card" data-lvl="EXPERT" style="--c:#ff2bd6">
+                        <div class="sc-icon">{}</div>
+                        <h3>BACKEND</h3>
+                        <p>Node.js, Express, Python, Flask, REST, GraphQL</p>
+                        <div class="sc-lvl">LV. <b>87</b></div>
+                        <div class="sc-bar"><div style="--w:87%"></div></div>
+                    </div>
+                    <div class="skill-card" data-lvl="HIGH" style="--c:#ffd400">
+                        <div class="sc-icon">DB</div>
+                        <h3>DATABASES</h3>
+                        <p>MongoDB, PostgreSQL, MySQL, Redis, Firebase</p>
+                        <div class="sc-lvl">LV. <b>82</b></div>
+                        <div class="sc-bar"><div style="--w:82%"></div></div>
+                    </div>
+                    <div class="skill-card" data-lvl="PRO" style="--c:#8a5cff">
+                        <div class="sc-icon">UI</div>
+                        <h3>UI / UX</h3>
+                        <p>Figma, Adobe XD, Motion, Prototyping, Accessibility</p>
+                        <div class="sc-lvl">LV. <b>78</b></div>
+                        <div class="sc-bar"><div style="--w:78%"></div></div>
+                    </div>
+                    <div class="skill-card" data-lvl="HIGH" style="--c:#36ff7a">
+                        <div class="sc-icon">3D</div>
+                        <h3>3D / WEBGL</h3>
+                        <p>Three.js, Blender, GLSL, Post-Processing</p>
+                        <div class="sc-lvl">LV. <b>74</b></div>
+                        <div class="sc-bar"><div style="--w:74%"></div></div>
+                    </div>
+                    <div class="skill-card" data-lvl="BUFFED" style="--c:#ff6a00">
+                        <div class="sc-icon">⚡</div>
+                        <h3>DEVOPS</h3>
+                        <p>Git, Docker, CI/CD, AWS, Vercel, Linux Wizardry</p>
+                        <div class="sc-lvl">LV. <b>70</b></div>
+                        <div class="sc-bar"><div style="--w:70%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WORLD 3 - QUESTS (PROJECTS) -->
+        <section id="world-3" class="world world-quests">
+            <div class="world-header">
+                <span class="world-tag">// WORLD 03</span>
+                <h2 class="world-title">COMPLETED<span> QUESTS</span></h2>
+                <div class="world-divider"><span></span><span></span><span></span></div>
+                <p class="world-sub">Each cartridge contains a shipped project. Hover to power-on.</p>
+            </div>
+
+            <div class="quest-grid">
+                <article class="cartridge" style="--c:#00ffd0">
+                    <div class="cart-screen">
+                        <img src="./images/ph-1.png" alt="" />
+                        <div class="cart-glow"></div>
+                    </div>
+                    <div class="cart-label">
+                        <div class="cart-rarity">★★★★★ LEGENDARY</div>
+                        <h3>NEONFLUX OS</h3>
+                        <p>An interactive dashboard for tracking real-time data with custom WebGL graphs.</p>
+                        <div class="cart-tags"><span>react</span><span>three.js</span><span>node</span></div>
+                    </div>
+                    <div class="cart-cta">▸ PLAY</div>
+                </article>
+
+                <article class="cartridge" style="--c:#ff2bd6">
+                    <div class="cart-screen">
+                        <img src="./images/ph-2.png" alt="" />
+                        <div class="cart-glow"></div>
+                    </div>
+                    <div class="cart-label">
+                        <div class="cart-rarity">★★★★ EPIC</div>
+                        <h3>PIXEL FORGE</h3>
+                        <p>A browser-based pixel-art tool with collaborative rooms and animation timelines.</p>
+                        <div class="cart-tags"><span>vue</span><span>canvas</span><span>ws</span></div>
+                    </div>
+                    <div class="cart-cta">▸ PLAY</div>
+                </article>
+
+                <article class="cartridge" style="--c:#ffd400">
+                    <div class="cart-screen">
+                        <img src="./images/ph-3.png" alt="" />
+                        <div class="cart-glow"></div>
+                    </div>
+                    <div class="cart-label">
+                        <div class="cart-rarity">★★★★ EPIC</div>
+                        <h3>CYBERCART</h3>
+                        <p>An e-commerce platform with a retro arcade UI, payment integration, and admin panel.</p>
+                        <div class="cart-tags"><span>next</span><span>stripe</span><span>postgres</span></div>
+                    </div>
+                    <div class="cart-cta">▸ PLAY</div>
+                </article>
+
+                <article class="cartridge" style="--c:#8a5cff">
+                    <div class="cart-screen">
+                        <img src="./images/ph-1.png" alt="" />
+                        <div class="cart-glow"></div>
+                    </div>
+                    <div class="cart-label">
+                        <div class="cart-rarity">★★★ RARE</div>
+                        <h3>SYNTH BLOG</h3>
+                        <p>Headless CMS-powered blog engine with markdown, code highlight & live preview.</p>
+                        <div class="cart-tags"><span>node</span><span>mongo</span><span>mdx</span></div>
+                    </div>
+                    <div class="cart-cta">▸ PLAY</div>
+                </article>
+
+                <article class="cartridge" style="--c:#36ff7a">
+                    <div class="cart-screen">
+                        <img src="./images/ph-2.png" alt="" />
+                        <div class="cart-glow"></div>
+                    </div>
+                    <div class="cart-label">
+                        <div class="cart-rarity">★★★★ EPIC</div>
+                        <h3>ARCADE PORTFOLIO</h3>
+                        <p>This very site. A 3D Three.js game-themed portfolio with a working mini-game.</p>
+                        <div class="cart-tags"><span>three.js</span><span>html5</span><span>chaos</span></div>
+                    </div>
+                    <div class="cart-cta">▸ PLAY</div>
+                </article>
+
+                <article class="cartridge" style="--c:#ff6a00">
+                    <div class="cart-screen">
+                        <img src="./images/ph-3.png" alt="" />
+                        <div class="cart-glow"></div>
+                    </div>
+                    <div class="cart-label">
+                        <div class="cart-rarity">★★★ RARE</div>
+                        <h3>TASKQUEST</h3>
+                        <p>Gamified to-do app where finishing tasks earns XP, loot, and pet companions.</p>
+                        <div class="cart-tags"><span>react</span><span>express</span><span>jwt</span></div>
+                    </div>
+                    <div class="cart-cta">▸ PLAY</div>
+                </article>
+            </div>
+        </section>
+
+        <!-- WORLD 4 - TESTIMONIALS / NPCS -->
+        <section id="world-4" class="world world-npcs">
+            <div class="world-header">
+                <span class="world-tag">// WORLD 04</span>
+                <h2 class="world-title">NPC<span> ENCOUNTERS</span></h2>
+                <div class="world-divider"><span></span><span></span><span></span></div>
+                <p class="world-sub">Allies you've met across the realms have something to say.</p>
+            </div>
+
+            <div class="npc-grid" id="npc-grid">
+                <article class="npc">
+                    <div class="npc-portrait"><img src="./images/lady.png" alt="" /><div class="npc-frame"></div></div>
+                    <div class="npc-dialog">
+                        <div class="npc-name">SARAH_K // CEO @ PIXELDRIFT</div>
+                        <p>"Bhavesh built our entire product from scratch. He critically hit every deadline and shipped clean code. 10/10 would respawn him again."</p>
+                        <div class="npc-rating">★★★★★</div>
+                    </div>
+                </article>
+                <article class="npc">
+                    <div class="npc-portrait"><img src="./images/lady.png" alt="" /><div class="npc-frame"></div></div>
+                    <div class="npc-dialog">
+                        <div class="npc-name">M. RIVERA // FOUNDER @ NEONSTACK</div>
+                        <p>"I gave him an impossible deadline and he beat it with a side-quest of polish. The animations alone gave me +10 INT."</p>
+                        <div class="npc-rating">★★★★★</div>
+                    </div>
+                </article>
+                <article class="npc">
+                    <div class="npc-portrait"><img src="./images/lady.png" alt="" /><div class="npc-frame"></div></div>
+                    <div class="npc-dialog">
+                        <div class="npc-name">A. PATEL // PM @ ARC LABS</div>
+                        <p>"A true tank developer — soaks up bugs, deals critical features, and never goes AFK. Solid hire."</p>
+                        <div class="npc-rating">★★★★★</div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- WORLD 5 - LORE / BLOG -->
+        <section id="world-5" class="world world-lore">
+            <div class="world-header">
+                <span class="world-tag">// WORLD 05</span>
+                <h2 class="world-title">LORE<span> ARCHIVE</span></h2>
+                <div class="world-divider"><span></span><span></span><span></span></div>
+                <p class="world-sub">Field notes, tutorials, & thoughts from across the dev-verse.</p>
+            </div>
+
+            <div class="lore-grid">
+                <article class="lore-card">
+                    <div class="lore-thumb"><img src="./images/article-ph-1.png" alt="" /></div>
+                    <div class="lore-body">
+                        <span class="lore-meta">CHAPTER 01 ● MAY 12, 2026</span>
+                        <h3>The Importance of DSA</h3>
+                        <p>Why mastering data structures is the equivalent of grinding XP before the final boss.</p>
+                        <a href="#" class="lore-link">READ ▸</a>
+                    </div>
+                </article>
+                <article class="lore-card">
+                    <div class="lore-thumb"><img src="./images/article-ph-2.png" alt="" /></div>
+                    <div class="lore-body">
+                        <span class="lore-meta">CHAPTER 02 ● JUN 02, 2026</span>
+                        <h3>Three.js: The Browser as a Game Engine</h3>
+                        <p>Building immersive 3D scenes on the open web with shaders, post-processing, and bloom.</p>
+                        <a href="#" class="lore-link">READ ▸</a>
+                    </div>
+                </article>
+                <article class="lore-card">
+                    <div class="lore-thumb"><img src="./images/article-ph-3.png" alt="" /></div>
+                    <div class="lore-body">
+                        <span class="lore-meta">CHAPTER 03 ● JUN 18, 2026</span>
+                        <h3>State Machines for UI Sanity</h3>
+                        <p>Why XState turned my React app from spaghetti into a well-oiled JRPG menu system.</p>
+                        <a href="#" class="lore-link">READ ▸</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- WORLD 6 - CONTACT / COMMUNICATOR -->
+        <section id="world-6" class="world world-contact">
+            <div class="world-header">
+                <span class="world-tag">// WORLD 06</span>
+                <h2 class="world-title">COMMS<span>_LINK</span></h2>
+                <div class="world-divider"><span></span><span></span><span></span></div>
+                <p class="world-sub">Open a transmission. I usually reply within one save cycle.</p>
+            </div>
+
+            <div class="contact-layout">
+                <div class="contact-cards">
+                    <div class="cc">
+                        <div class="cc-icon">☎</div>
+                        <span>VOICE CHANNEL</span>
+                        <b>+91 99999 99999</b>
+                    </div>
+                    <div class="cc">
+                        <div class="cc-icon">✉</div>
+                        <span>DATA PACKET</span>
+                        <b>bhaveshxop@gmail.com</b>
+                    </div>
+                    <div class="cc">
+                        <div class="cc-icon">⌖</div>
+                        <span>BASE COORDS</span>
+                        <b>Bibwewadi, PUNE</b>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="event.preventDefault(); window.__gameAPI && window.__gameAPI.sendTransmission(this);">
+                    <div class="form-header">
+                        <span>● ● ●</span>
+                        <span>OPEN_TRANSMISSION.exe</span>
+                        <span>—  □  ✕</span>
+                    </div>
+                    <div class="form-body">
+                        <label><span>PLAYER_NAME</span><input type="text" required placeholder="enter callsign..." /></label>
+                        <label><span>RETURN_LINK</span><input type="email" required placeholder="you@somewhere.dev" /></label>
+                        <label><span>SUBJECT</span><input type="text" required placeholder="re: collab opportunity..." /></label>
+                        <label><span>MESSAGE</span><textarea required rows="5" placeholder="// start your transmission..."></textarea></label>
+                        <button type="submit" class="game-btn primary big"><span>▸ TRANSMIT</span></button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="game-footer">
+            <div class="footer-inner">
+                <div class="footer-brand">BHAVESH.EXE</div>
+                <div class="footer-socials">
+                    <a href="#" aria-label="github">GH</a>
+                    <a href="#" aria-label="twitter">TW</a>
+                    <a href="#" aria-label="linkedin">IN</a>
+                    <a href="#" aria-label="instagram">IG</a>
+                    <a href="#" aria-label="email">EM</a>
+                </div>
+                <div class="footer-copy">© 2026 BHAVESH PATIL ● BUILT WITH ♥ + THREE.JS ● ALL RIGHTS RESERVED</div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- ─────────────────────────────  BOTTOM HUD  ───────────────────────────── -->
+    <footer class="hud-bottom" id="hud-bottom">
+        <div class="hud-hint">
+            <kbd>SCROLL</kbd> EXPLORE
+            <kbd>1-6</kbd> WARP
+            <kbd>M</kbd> MUTE
+            <kbd>G</kbd> MINI-GAME
+        </div>
+        <div class="hud-coords" id="hud-coords">X:0000 Y:0000 Z:0000</div>
+        <div class="hud-sig">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span> SIGNAL_OK
+        </div>
+    </footer>
+
+    <!-- ─────────────────────────────  ACHIEVEMENT TOAST  ───────────────────────────── -->
+    <div id="achievement-toast" class="achievement" aria-live="polite">
+        <div class="ach-icon">🏆</div>
+        <div class="ach-body">
+            <div class="ach-title">ACHIEVEMENT UNLOCKED</div>
+            <div class="ach-text" id="ach-text">First Encounter</div>
+        </div>
+    </div>
+
+    <!-- ─────────────────────────────  PAUSE MENU  ───────────────────────────── -->
+    <div id="pause-menu" class="pause-menu" hidden>
+        <div class="pause-inner">
+            <h2 class="glitch" data-text="– PAUSED –">– PAUSED –</h2>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#about">About </a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="#blog">Blog</a></li>      
+                <li><button data-act="resume">▸ RESUME</button></li>
+                <li><button data-act="minigame">▸ LAUNCH MINI-GAME</button></li>
+                <li><button data-act="mute">▸ TOGGLE SOUND</button></li>
+                <li><button data-act="restart">▸ RESTART BOOT</button></li>
+                <li><button data-act="credits">▸ CREDITS</button></li>
             </ul>
+            <div class="pause-foot">PRESS [ESC] TO RESUME</div>
         </div>
-        <div class="container">
-        <nav id="main-nav" class="flex items-center justify-between">
-            <div class="left flex items-center">
-                <div class="branding">
-                    <img src="images/logo.svg" alt="logo">
-                </div>
-                <div>
-                    <a href="#">Home</a>
-                    <a href="#about">About </a>
-                    <a href="#services">Services</a>
-                    <a href="#work">Work</a>
-                    <a href="#blog">Blog</a>
-                </div>
+    </div>
+
+    <!-- ─────────────────────────────  MINI-GAME MODAL  ───────────────────────────── -->
+    <div id="minigame-modal" class="minigame-modal" hidden>
+        <div class="mg-frame">
+            <div class="mg-header">
+                <span>BUG_HUNT.exe</span>
+                <span id="mg-score">SCORE: 0</span>
+                <span id="mg-time">TIME: 30</span>
+                <button id="mg-close">✕</button>
             </div>
-            <div class="right">
-                <button class="btn btn-primary">contact</button>
+            <canvas id="minigame-canvas" width="640" height="420"></canvas>
+            <div class="mg-instructions" id="mg-instructions">
+                <h3>BUG HUNT</h3>
+                <p>Click the bugs as they crawl across the screen. Avoid the <span class="hl">stars</span> — they remove time. Reach the highest score in 30 seconds!</p>
+                <button id="mg-start">▸ START GAME</button>
             </div>
-        </nav>
-        <div class="hero flex items-center justify-between">
-            <div class="left flex-1 flex justify-center">
-                <img src="./images/man.png" alt="man img">
-            </div>
-            <div class="right flex-1">
-                <h6>Bhavesh Patil</h6>
-                <h1>   I am a website <span>   Developer    </span></h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia natus sint veniam, esse explicabo in aspernatur dicta. Nulla inventore animi fuga itaque error consectetur dolores dolor, vel, voluptatibus, magnam commodi?</p>
-                <div><button class="btn btn-secondary">DOWNLOAD CV</button></div>
+            <div class="mg-gameover" id="mg-gameover" hidden>
+                <h3>GAME OVER</h3>
+                <p>Final Score: <b id="mg-final">0</b></p>
+                <p>High Score: <b id="mg-high">0</b></p>
+                <button id="mg-restart">▸ RETRY</button>
             </div>
         </div>
-        </div>
-       </header>
-       <section id="about" class="about">
-        <div class="container flex items-center about-inner-wrap">
-            <div class="flex-1">
-                <img class="about-me-img" src="./images/man-2.png" alt="man 2 img">
-            </div>
-            <div class="flex-1 right">
-                <h1>About<span> Me</span></h1>
-                <h3> Hello I am Bhavesh Patil</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis illum ipsum similique neque illo tempora eius accusantium. Fuga possimus dolores rerum, reiciendis, veniam debitis eos nesciunt veritatis nostrum maiores dignissimos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem veniam sed, tempore possimus similique ab sequi est cupiditate provident quibusdam velit voluptate, quo quia reiciendis alias neque, excepturi reprehenderit ad!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fuga commodi quam natus dolores ipsa, reprehenderit porro nesciunt eum consequuntur non! Enim, repudiandae dignissimos cumque laboriosam modi di</p> 
-            </div>
-           <!-- <div class="social">
-                <a href="#"><img src="./images/website.svg" alt="website"></a>
-                <a href="#"><img src="./images/facebook.svg" alt="facebook"></a>
-                <a href="#"><img src="./images/twitter.svg" alt="twitter"></a>
-                <a href="#"><img src="./images/pintrest.svg" alt="pintrest"></a>
-                <a href="#"><img src="./images/instagram.svg" alt="instagram"></a>
-            </div>-->
-        </div>
-       </section>
-       <section id="services" class="services">
-        <div class="container">
-            <h1 class="section-heading"><span>Our</span> Services</h1>
-            <p>providing the best solutions providing the best solutions </p>
-            <div class="card-wrapper">
-                <div class="card">
-                    <img src="./images/brush.svg" alt="">
-                    <h2>Graphic Desgin</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni blanditiis magnam, reprehenderit placeat illum nobis rem dicta cupt.</p>
-                </div>
-                <div class="card">
-                    <img src="./images/code.svg" alt="">
-                    <h2>Graphic Desgin</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni blanditiis magnam, reprehenderit placeat illum nobis rem dicta cupt.</p>
-                </div>
-                <div class="card">
-                    <img src="./images/bag.svg" alt="">
-                    <h2>Graphic Desgin</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni blanditiis magnam, reprehenderit placeat illum nobis rem dicta cupt.</p>
-                </div>
-                <div class="card">
-                    <img src="./images/brush.svg" alt="">
-                    <h2>Graphic Desgin</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni blanditiis magnam, reprehenderit placeat illum nobis rem dicta cupt.</p>
-                </div>
-                <div class="card">
-                    <img src="./images/brush.svg" alt="">
-                    <h2>Graphic Desgin</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni blanditiis magnam, reprehenderit placeat illum nobis rem dicta cupt.</p>
-                </div>
-                <div class="card">
-                    <img src="./images/brush.svg" alt="">
-                    <h2>Graphic Desgin</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni blanditiis magnam, reprehenderit placeat illum nobis rem dicta cupt.</p>
-                </div>
-            </div>
-        </div>
-       </section>
-       <section class="freelancer">
-        <h1> I am Avaliable for Freelancing</h1>
-        <p>We provide high standard clean website for your business solutions</p>
-        <button class="btn btn-primary">DOWNLOAD CV</button>
-       </section>
-       <section class="review">
-            <div class="container">
-                <h1 class="section-heading"><span>Our</span> client</h1>
-                <p>They provide high standard clean website for your business solutions</p>
-                <div class="slider">
-                    <div class="slide">
-                        <img src="./images/lady.png" alt="">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam enim explicabo ullam! Nam dicta adipisci reiciendis neque odio. Dolorem eligendi nostrum ducimus esse nemo fugiat vero! Fugiat doloribus beatae nobis!</p>
-                        <span>John Doel, company abc</span>
-                    </div>
-                    <div class="slide">
-                        <img src="./images/lady.png" alt="">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam enim explicabo ullam! Nam dicta adipisci reiciendis neque odio. Dolorem eligendi nostrum ducimus esse nemo fugiat vero! Fugiat doloribus beatae nobis!</p>
-                        <span>John Doel, company abc</span>
-                    </div>
-                    <div class="slide">
-                        <img src="./images/lady.png" alt="">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam enim explicabo ullam! Nam dicta adipisci reiciendis neque odio. Dolorem eligendi nostrum ducimus esse nemo fugiat vero! Fugiat doloribus beatae nobis!</p>
-                        <span>John Doel, company abc</span>
-                    </div>
-                    <div class="slide">
-                        <img src="./images/lady.png" alt="">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam enim explicabo ullam! Nam dicta adipisci reiciendis neque odio. Dolorem eligendi nostrum ducimus esse nemo fugiat vero! Fugiat doloribus beatae nobis!</p>
-                        <span>John Doel, company abc</span>
-                    </div>
-                </div>
-                <div class="slider-dots">
-    
-                </div>
-            </div>
-       </section>
-       <section id="work" class="work">
-        <div class="container">
-            <h1 class="section-heading"><span>Our</span> Works</h1>
-            <p>We provide high standard clean website for your business solutions</p>
-            <div class="card-wrapper">
-                <div class="card">
-                    <div class="overlay">
-                        <span>Category</span>
-                        <a href="#">Web Development</a>
-                    </div>
-                    <img src="./images/ph-1.png" alt="">
-                </div>
-                <div class="card">
-                    <div class="overlay">
-                        <span>Category</span>
-                        <a href="#">Web Development</a>
-                    </div>
-                    <img src="./images/ph-2.png" alt="">
-                </div>
-                <div class="card">
-                    <div class="overlay">
-                        <span>Category</span>
-                        <a href="#">Web Development</a>
-                    </div>
-                    <img src="./images/ph-3.png" alt="">
-                </div>
-                <div class="card">
-                    <div class="overlay">
-                        <span>Category</span>
-                        <a href="#">Web Development</a>
-                    </div>
-                    <img src="./images/ph-3.png" alt="">
-                </div>
-                <div class="card">
-                    <div class="overlay">
-                        <span>Category</span>
-                        <a href="#">Web Development</a>
-                    </div>
-                    <img src="./images/ph-2.png" alt="">
-                </div>
-                <div class="card">
-                    <div class="overlay">
-                        <span>Category</span>
-                        <a href="#">Web Development</a>
-                    </div>
-                    <img src="./images/ph-1.png" alt="">
-                </div>
-                
-            </div>
-        </div>
-       </section>
-       <section id="blog" class="blog">
-        <div class="container">
-            <h1 class="section-heading"><span>Our</span> Blog</h1>
-            <p>We provide high standard clean website for your business solutions</p>
-    
-            <div class="card-wrapper">
-                <div class="card">
-                    <div class="img-wrapper">
-                        <img src="./images/article-ph-1.png" alt="">
-                    </div>
-                    <div class="card-content">
-                        <a href="#">
-                            <h1>The importance of DSA</h1>
-                        </a>
-                        <span>May 12,2017</span>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam ducimus culpa asperiores vel. Maxime molestiae, corrupti voluptate at sequi veniam quasi, perspiciatis rem esse a eligendi illo molestias dolorem minus?</p>
-                        <a class="read-more" href="#">Read more</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="img-wrapper">
-                        <img src="./images/article-ph-2.png" alt="">
-                    </div>
-                    <div class="card-content">
-                        <a href="#">
-                            <h1>The importance of DSA</h1>
-                        </a>
-                        <span>May 12,2017</span>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam ducimus culpa asperiores vel. Maxime molestiae, corrupti voluptate at sequi veniam quasi, perspiciatis rem esse a eligendi illo molestias dolorem minus?</p>
-                        <a class="read-more" href="#">Read more</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="img-wrapper">
-                        <img src="./images/article-ph-3.png" alt="">
-                    </div>
-                    <div class="card-content">
-                        <a href="#">
-                            <h1>The importance of DSA</h1>
-                        </a>
-                        <span>May 12,2017</span>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam ducimus culpa asperiores vel. Maxime molestiae, corrupti voluptate at sequi veniam quasi, perspiciatis rem esse a eligendi illo molestias dolorem minus?</p>
-                        <a class="read-more" href="#">Read more</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-       </section>
-       <section class="contact">
-        <div class="container">
-            <h1 class="section-heading">Contact<span> Us</span></h1>
-            <p>We provide high standard clean website for your business solutions</p>
-            <div class="card-wrapper">
-                <div class="card">
-                    <img src="./images/call.png" alt="">
-                    <h2>Call Us on</h2>
-                    <h6>+91 99999999</h6>
-                </div>
-                <div class="card">
-                    <img src="./images/email.png" alt="">
-                    <h2>Email Us at</h2>
-                    <h6>bhaveshxop@gmail.com</h6>
-                </div>
-                <div class="card">
-                    <img src="./images/office.png" alt="">
-                    <h2>Visit office</h2>
-                    <h6>Bibwewadi, PUNE</h6>
-                </div>
-            </div>
-          <form action="">
-            <div class="input-wrap">
-                <input type="text" placeholder="Your Name*">
-                <input type="email" placeholder="Your Email*">
-            </div>
-            <div class="input-wrap-2">
-                <input type="text" placeholder="Your Subject...">
-                <textarea placeholder="Your Message..." id="" cols="30" rows="10"></textarea>
-            </div>
-            <div class="btn-wrapper">
-                <button class="btn btn-primary">Send Message</button>
-            </div>
-        </div>
-          </form>
-       </section>
-       <footer>
-        <img class="footer-logo" src="./images/logo-2.svg" alt="">
-        <div class="footer-socials">
-            <a href="#"><img src="./images/website.svg" alt="website"></a>
-            <a href="#"><img src="./images/face.png" alt="facebook"></a>
-            <a href="#"><img src="./images/twitter.svg" alt="twitter"></a>
-            <a href="#"><img src="./images/pintrest.svg" alt="pintrest"></a>
-            <a href="#"><img src="./images/instagram.svg" alt="instagram"></a>
-        </div>
-        <div class="copyright">
-            Copyright 2024 Bhaveshxop All Rights Reserved !!
-        </div>
-       </footer>
-  </div>
-   <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <script src="/js/app.js"></script>
+    </div>
+
+    <!-- ─────────────────────────────  KONAMI EASTER EGG OVERLAY  ───────────────────────────── -->
+    <div id="konami-overlay" class="konami-overlay" hidden>
+        <h1 class="glitch" data-text="★ CHEAT CODE ACTIVATED ★">★ CHEAT CODE ACTIVATED ★</h1>
+        <p>+999 XP &nbsp; ● &nbsp; GOD MODE ENABLED &nbsp; ● &nbsp; PARTICLE RAIN UNLEASHED</p>
+    </div>
+
+    <!-- Scripts (ES modules) -->
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>
